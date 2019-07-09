@@ -19,12 +19,10 @@ export default {
   },
   methods: {
     onSubmitted(postData) {
-      axios.post('https://cors-anywhere.herokuapp.com/https://nuxt-blog-dc733.firebaseio.com/posts.json', {
-        ...postData, 
-        updatedDate: new Date()
+      this.$store.dispatch('addPost', postData)
+      .then(() => {
+        this.$router.push('/admin');
       })
-      .then(res => console.log(res))
-      .catch(e => console.log(e))
     }
   }
 }
