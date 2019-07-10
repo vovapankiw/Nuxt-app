@@ -6,13 +6,15 @@
 </template>
 
 <script>
-import PostList from "~/components/Posts/PostList"
 
 export default {
+<<<<<<< HEAD
   middleware: 'log',
   components: {
     PostList
   }, 
+=======
+>>>>>>> 7cbf473fe6b0f93ff6d24771b355820fcf0849d0
   computed: {
     loadedPost() {
       return this.$store.getters.loadedPost;

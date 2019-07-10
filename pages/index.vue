@@ -8,13 +8,8 @@
 </template>
 
 <script>
-import PostList from "~/components/Posts/PostList"
-import { setTimeout } from 'timers';
 
 export default {
-  components: {
-    PostList
-  },
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPost;

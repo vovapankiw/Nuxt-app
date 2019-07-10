@@ -13,7 +13,12 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.5.4",
     "axios": "^0.19.0",
+<<<<<<< HEAD
     "nuxt": "^2.8.1"
+=======
+    "js-cookies": "^1.0.4",
+    "nuxt": "^2.0.0"
+>>>>>>> 7cbf473fe6b0f93ff6d24771b355820fcf0849d0
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
