@@ -19,22 +19,24 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff', height: '4px', duration: 5000 },
+  loading: { color: '#fff', height: '4px', duration: 2000 },
   /*
   ** Global CSS
   */
   css: [
-    // '~assets/styles/main.css'
+    '~assets/styles/main.css'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/core-components.js',
+    '~plugins/date-filter.js'
   ],
   /*
   ** Nuxt.js modules
   */
-  modules: [
+  modules: [  
   ],
   /*
   ** Build configuration
@@ -48,6 +50,10 @@ export default {
   },
   env:{
     baseUrl: process.env.BASE_URL || 'https://nuxt-blog-dc733.firebaseio.com'
+  },
+  transition: {
+    name: 'fade',
+    mode: 'out-in',
   },
   router: {
     extendRoutes(routes, resolve) {
