@@ -25,29 +25,18 @@ export default {
       email: '',
       password: '',
     }
-<<<<<<< HEAD
   },
-=======
-  }, 
->>>>>>> 7cbf473fe6b0f93ff6d24771b355820fcf0849d0
+
   methods: {
     onSubmit() {
       this.$store.dispatch('authenticateUser', {
         isLogin: this.isLogin,
-<<<<<<< HEAD
         email: this.email,
         password: this.password,
       })
       .then(() => {
         this.$router.push('/admin');
       })
-=======
-        email: this.email, 
-        password: this.password
-      }).then((() => {
-        this.$router.push('/admin')
-      }))
->>>>>>> 7cbf473fe6b0f93ff6d24771b355820fcf0849d0
     }
   },
 }

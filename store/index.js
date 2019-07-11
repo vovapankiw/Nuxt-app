@@ -1,6 +1,6 @@
 import Vuex from "vuex";
 import axios from "axios";
-import Cookie from 'js-cookies';
+import Cookies from 'js-cookie';
 
 const createStore = () => {
   return new Vuex.Store({
@@ -85,8 +85,9 @@ const createStore = () => {
             vuexContext.commit('setToken', result.idToken);
             localStorage.setItem('token', result.idToken);
             localStorage.setItem('tokenExpiration', new Date().getTime() + Number.parseInt(result.expiresIn) * 1000 );
-            Cookie.set('jwt', result.idToken);
-            Cookie.set('expirationDate',  new Date().getTime() + Number.parseInt(result.expiresIn) * 1000);
+            Cookies.set('jwt', result.idToken);
+            Cookies.set('expirationDate',  new Date().getTime() + Number.parseInt(result.expiresIn) * 1000);
+            return this.$axios.$post('localhost:3000/api/track-data', {data: 'Authenticated'})
           })
           .catch(e => console.log(e));
       },
@@ -97,14 +98,14 @@ const createStore = () => {
           if(req.headers.cookies) {
             return;
           }
-          
-          const jwtCookies = req.headers.cookies.split(';').find(c => c.trim().startsWith('jwt='))
+
+          const jwtCookies = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
           if(!jwtCookies) {
             return ;
           }
 
           token = jwtCookies.split('=')[1];
-          ExpirationDate = req.headers.cookies.split(';').find(c => c.trim().startsWith('expirationDate='))
+          ExpirationDate = req.headers.cookie.split(';').find(c => c.trim().startsWith('expirationDate='))
           .split('=')[1];
         } else {
           token = localStorage.getItem('token');
@@ -120,10 +121,12 @@ const createStore = () => {
       },
       logout(vuexContext) {
         vuexContext.commit('clearToken');
-        Cookie.remove('token');
-        Cookie.remove('expirationDate');
-        localStorage.removeItem('token');
-        localStorage.removeItem('tokenExpiration');
+        Cookies.remove('token');
+        Cookies.remove('expirationDate');
+        if(process.client) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('tokenExpiration');
+        }
       },
     },
     getters: {
